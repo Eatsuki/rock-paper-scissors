@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RockPaperScissors</title>
+
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title glow">Best-Of-5</h1>
+    </header>
+
+    <main class="play-area">
+      <section class="section weapons-center">
+        <article class="player-container">
+          <img src="./images/178683.jpg" class="img player-img" alt="" />
+          <h3 class="player-name">player</h3>
+        </article>
+
+        <article class="weapons-container">
+          <!-- single weapon -->
+          <div class="weapon">
+            <img
+              src="./images/rock.png"
+              class="img weapon-img"
+              alt=""
+              id="rock"
+            />
+            <h4 class="weapon-name">rock</h4>
+          </div>
+          <!-- end of single weapon -->
+
+          <!-- single weapon -->
+          <div class="weapon">
+            <img
+              src="./images/paper.png"
+              class="img weapon-img"
+              alt=""
+              id="paper"
+            />
+            <h4 class="weapon-name">paper</h4>
+          </div>
+          <!-- end of single weapon -->
+
+          <!-- single weapon -->
+          <div class="weapon">
+            <img
+              src="./images/scissors.png"
+              class="img weapon-img"
+              alt=""
+              id="scissors"
+            />
+            <h4 class="weapon-name">scissors</h4>
+          </div>
+          <!-- end of single weapon -->
+        </article>
+
+        <article class="player-container">
+          <img
+            src="./images/robot.jpg"
+            class="img player-img"
+            alt=""
+            id="scissors"
+          />
+          <h3 class="player-name">computer</h3>
+        </article>
+      </section>
+
+      <section class="section score-center">
+        <article class="score-container">
+          <h1 class="score player-score">0</h1>
+        </article>
+        <article class="result-alert">
+          <p class="result"></p>
+        </article>
+        <article class="score-container">
+          <h1 class="score computer-score">0</h1>
+        </article>
+      </section>
+    </main>
+
+    <!-- modal -->
+
+    <div class="modal-overlay">
+      <div class="modal-container">
+        <h3 class="modal-text">modal content</h3>
+        <button class="btn retry-btn" type="button">play again</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

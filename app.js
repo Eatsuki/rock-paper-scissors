@@ -1,7 +1,49 @@
-const computerPlay = () => {
+let playerSelection;
+let playerScore = 0;
+let computerScore = 0;
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const rock = document.querySelector('#rock');
+const weapons = document.querySelectorAll('.weapon-img');
+const result = document.querySelector('.result');
+const txtPlayerScore = document.querySelector('.player-score');
+const txtComputerScore = document.querySelector('.computer-score');
+const modal = document.querySelector('.modal-overlay');
+const modalButton = document.querySelector('.retry-btn');
+const modalText = document.querySelector('.modal-text');
+
+weapons.forEach((weapon) => {
+  weapon.addEventListener('click', (e) => {
+    playerSelection = e.target.id;
+    computerSelection = computerPlay();
+
+    if (playerScore != 5 && computerScore != 5) {
+      playRound(playerSelection, computerSelection);
+    }
+  });
+});
+
+function updateScore() {
+  txtPlayerScore.textContent = playerScore;
+  txtComputerScore.textContent = computerScore;
+}
+
+function computerPlay() {
   const weapons = ['rock', 'paper', 'scissors'];
   return weapons[Math.floor(Math.random() * weapons.length)];
-};
+}
+
+function checkWinner() {
+  if (playerScore == 5) {
+    modal.classList.add('open-modal');
+    modalText.textContent = 'Congrats! You win!';
+    return;
+  } else if (computerScore === 5) {
+    modal.classList.add('open-modal');
+    modalText.textContent = 'Computer wins! Nice try!';
+    return;
+  }
+}
 
 const playRound = (playerSelection, computerSelection) => {
   let player = playerSelection.toLowerCase();
@@ -9,37 +51,56 @@ const playRound = (playerSelection, computerSelection) => {
 
   if (player === 'rock') {
     if (computer === 'rock') {
-      return "It's a tie";
+      result.textContent = "It's a tie";
     } else if (computer === 'scissors') {
-      return 'Player wins the round! Rock beats Scissors';
+      result.textContent = 'Player wins the round! Rock beats Scissors';
+      playerScore++;
+      updateScore();
+      checkWinner();
     } else {
-      return 'Computer wins the round! Paper beats Rock';
+      result.textContent = 'Computer wins the round! Paper beats Rock';
+      computerScore++;
+      updateScore();
+      checkWinner();
     }
   } else if (player === 'scissors') {
     if (computer === 'rock') {
-      return 'Computer wins the round!  Rock beats Scissors';
+      result.textContent = 'Computer wins the round!  Rock beats Scissors';
+      computerScore++;
+      updateScore();
+      checkWinner();
     } else if (computer === 'scissors') {
-      return "It's a tie";
+      result.textContent = "It's a tie";
     } else {
-      return 'Player wins the round!  Scissors beats Paper';
+      result.textContent = 'Player wins the round!  Scissors beats Paper';
+      playerScore++;
+      updateScore();
+      checkWinner();
     }
   } else if (player === 'paper') {
     if (computer === 'rock') {
-      return 'Player wins the round! Paper beats Rock';
+      result.textContent = 'Player wins the round! Paper beats Rock';
+      playerScore++;
+      updateScore();
+      checkWinner();
     } else if (computer === 'scissors') {
-      return 'Computer wins the round! Scissors beats Paper';
+      result.textContent = 'Computer wins the round! Scissors beats Paper';
+      computerScore++;
+      updateScore();
+      checkWinner();
     } else {
-      return "It's a tie";
+      result.textContent = "It's a tie";
     }
   }
 };
 
-const game = () => {
-  for (let i = 0; i < 5; i++) {
-    let computerSelection = computerPlay();
-    let playerSelection = prompt('Choose your weapon! Rock | Paper | Scissors');
-    console.log(playRound(playerSelection, computerSelection));
-  }
-};
+function resetScore() {
+  playerScore = 0;
+  computerScore = 0;
+}
 
-game();
+modalButton.addEventListener('click', (e) => {
+  modal.classList.remove('open-modal');
+  resetScore();
+  updateScore();
+});
